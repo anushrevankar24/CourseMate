@@ -36,12 +36,40 @@ Follow these steps to set up the project from scratch.
        ```
        source venv/bin/activate
        ```
+3. **Navigate to the project directory**
+     ```bash
+     cd CourseMate
+     ```
+     
 
-2. **Install Dependencies:**
+
+4. **Install Dependencies:**
 
    - Install required packages using the provided requirements.txt file:
      ```
      pip install -r requirements.txt
      ```
-3. **Running the Application:** 
-  
+ ## Running the Application:     
+  1. **Perform database migrations**
+      ```
+      python manage.py makemigrations
+      ```
+      ```
+       python manage.py migrate
+      ```
+ 2. **Create a superuser**  
+```
+ python manage.py createsuperuser  
+``` 
+3.**Start the development server**
+```
+python manage.py runserver
+```
+
+
+
+
+
+
+
+
