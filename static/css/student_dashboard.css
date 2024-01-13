@@ -1,0 +1,79 @@
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #A7C7E7;
+    }
+    .container {
+      padding: 2rem 1rem;
+    }
+   
+      .view-courses h4 {
+      margin: 0;
+      color: #1434A4;
+      padding-left: 10px;
+      font-family: 'Roboto', sans-serif;
+    }
+      .course-cart h4 {
+      margin: 0;
+      color: #1434A4;
+      padding-left: 10px;
+      font-family: 'Roboto', sans-serif;
+    }
+    
+    
+    .navbar ul{
+      display: inline-flex;
+      margin-left: 58%;
+    }
+    .navbar ul li{
+      list-style: none;
+      margin-left: 20px;
+    }
+    .navbar ul li:first-child{
+      margin-left: 20px;
+    }
+    .navbar {
+      background-color: white;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Box shadow */
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 95%;
+       height: 5rem; 
+      margin: 1rem auto 0; 
+      border-radius: 1rem; 
+    }
+    .navbar h1 {
+      margin: 0;
+      font-size: 26px;
+      color: #1434A4;
+      padding-left: 10px;
+      font-family: 'Roboto', sans-serif;
+
+    }
+    .navbar ul li a {
+      text-decoration: none;
+      color: #1434A4;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    .navbar ul li a:hover {
+      background-color: #1434A4;
+      color: white;
+    }
+    .logout-btn {
+      background-color: #1434A4;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    /* .logout-btn:hover {
+      background-color: #4CAF50;
+    } */

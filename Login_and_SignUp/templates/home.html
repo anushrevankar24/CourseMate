@@ -1,0 +1,52 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+          rel="stylesheet"
+        />
+    <title>CourseMate.com</title>
+    <script src="https://kit.fontawesome.com/f4658b3025.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav>
+        <div class="menu">
+          <div class="logo">
+            <!-- <img src="./logo.jpeg" alt="logo" height="50px" width="50px"> -->
+            <a href="#">CourseMate</a>
+          </div>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="https://www.linkedin.com/in/anush-revankar-0ab02225b/">Contact</a></li>
+            <li><a href="#">Feedback</a></li>
+          </ul>
+        </div>
+      </nav>
+      
+    <!-- <header>
+        <h1>Course Registration System</h1>
+    </header> -->
+    <div class="button-container">
+        <div class="button-wrapper">
+            <h1>Login as:</h1>
+            <button class="button" onclick="window.location.href='/student-login/'">Student</button>
+            <button class="button" onclick="window.location.href='/faculty-login/'">Faculty</button>
+            <button class="button" onclick="window.location.href='/admin-login/'">Admin</button> 
+        </div>
+    </div>
+    <footer>
+        <!-- <div class="container">
+            
+            <p> © 2020 Copyright: coursemate.com
+            </p>
+            
+        </div> -->
+    </footer>
+</body>
+</html>

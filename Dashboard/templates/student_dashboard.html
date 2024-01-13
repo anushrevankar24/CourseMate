@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href='/static/css/student_dashboard.css'>
+  <title>Student Dashboard</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-light bg-light mx-4"style="width:92rem;">
+      <h1>Student Dashboard</h1>
+      <ul class="nav ">
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#course-cart">Course Cart</a></li>
+      </ul>
+      <button class="logout-btn" onclick="window.location.href='/logout/';">Log out</button> 
+    </nav>
+  </header>
+<section class="my_submissions card bg-white mx-4 my-4 p-3" id="my_submissions" style="width : 24rem;">
+  <h4>My Submissions</h4>
+<div class="container p-1 bg-white mx-1 my-1" style="width : 20rem;">
+  <div class="row">
+    <div class="col">
+      <div style="max-height: 500px; overflow-y: auto;">
+        <table id="Submission-table" class="table table-fixed table-striped table-light" style="width : 19rem;">
+          <thead>
+            <tr>
+              <th scope="col">Course Code</th>
+              <th scope="col-sm-1">Status</th>
+            </tr>
+          </thead>
+          <tbody id="Submission-table">
+            {% for submission in submissions %}
+              <tr>
+                <td>{{submission.course.code}}</td>
+                <td>{{submission.status}}</td>
+              </tr>
+            {% endfor %} 
+          </tbody>
+        </table>   
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+  <section class="view-courses card bg-white mx-4 my-4 w-55 p-3">
+    <h4>Available Courses</h4>
+    <div class="row g-3 mx-2 my-1">
+      <div class="col-sm-4 ">
+        <input class="form-control p-2 me-1 border-primary" id="myInput" type="text" placeholder="Search courses by code, title, or department">
+      </div>
+      </div>
+  <div class="container-fluid p-1 bg-white mx-1 my-1 ">
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endfor%}
+    <div class="row">
+      <div class="col">
+        <div style="max-height: 500px; overflow-y: auto;">
+          <table id="dtBasicExample" class="table table-fixed table-striped table-light bg-white">
+            <thead>
+              <tr>
+                <th scope="col">Course Code</th>
+                <th scope="col">Course Title</th>
+                <th scope="col">Department</th>
+                <th scope="col">Instructor</th>
+                <th scope="col">Credits</th>
+                <th scope="col">Slots</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="myTable">
+              {% for course in courses %}
+              <tr>
+                <td>{{course.code}}</td>
+                <td>{{course.title}}</td>
+                <td>{{course.department}}</td>
+                <td>{{course.instructor}}</td>
+                <td>{{course.credits}}</td>
+                <td>{{course.filled_slots}} / {{ course.slots}}</td>
+                <td>
+                  <a href="{% url 'course_details' course.code %}" class="btn btn-success btn-sm p-2 m-1">View details</a>
+                  <a href="{% url 'add_to_cart' course.code %}" class="btn btn-primary btn-sm p-2 m-1" onclick="refreshPage()">Add to cart</a>
+                </td>   
+              </tr>
+              {% endfor %} 
+            </tbody>
+      </table>    
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="course-cart card bg-white mx-4 my-4 w-55 p-3" id="course-cart">
+  <h4>Course Cart</h4>
+<div class="container-fluid p-1 bg-white mx-1 my-1 ">
+  <div class="row">
+    <div class="col">
+      <div style="max-height: 500px; overflow-y: auto;">
+        <table id="cart-table" class="table table-fixed table-striped table-light ">
+          <thead>
+            <tr>
+              <th scope="col">Course Code</th>
+              <th scope="col">Course Title</th>
+              <th scope="col">Department</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody id="cart-table">
+            {% for item in cart_items %}
+              <tr>
+                <td>{{item.course.code}}</td>
+                <td>{{item.course.title}}</td>
+                <td>{{item.course.department}}</td>
+                <td>
+                  <a href="{% url 'remove_from_cart' item.course.code %}" class="btn btn-danger btn-sm p-2 m-1" onclick="refreshPage()">Remove from cart</a>
+                </td>
+              </tr>
+            {% endfor %} 
+          </tbody>
+        </table>   
+      </div>
+    </div>
+  </div>
+</div>
+   <div class="content" align='right'>
+    <a href="{% url 'submit'%}" class="btn btn-primary btn-pull-right m-2" onclick="refreshPage()">Submit courses</a>
+   </div>
+</section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script>
+    function refreshPage() {
+      window.location.reload();
+    }
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    document.addEventListener("DOMContentLoaded",() =>{
+      $('.alert').alert();
+    })
+    </script>
+</body>
+</html>
+
+

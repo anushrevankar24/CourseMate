@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href='/static/css/faculty_dashboard.css'>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-light bg-light mx-5"style="width:90rem;">
+      <h1>Admin Dashboard</h1>
+      <ul class="nav ">
+        <li><a href="#profile">Profile</a></li>
+      </ul>
+      <button class="logout-btn" onclick="window.location.href='/logout/';">Log out</button> 
+    </nav>
+  </header>
+  <section class="ongoing-courses card bg-white mx-5 my-4 p-3" id="ongoing-courses" style="width:90rem">
+    <h4>Ongoing courses</h4>
+    <div class="row g-3 mx-2 my-1">
+      <div class="col-sm-4 ">
+        <input class="form-control p-2 me-1  border-primary" id="myInput" type="text" placeholder="Search courses by code, title, or department">
+      </div>
+      </div>
+    <div class="container-fluid p-1 bg-white mx-1 my-1" style="width:85rem">
+        <div class="row">
+            <div class="col">
+                <div style="max-height: 400px; overflow-y: auto;  overflow-x: hidden;">
+                  <table id="dtBasicExample" class="table table-fixed table-striped table-light bg-white">
+                    <thead>
+                      <tr>
+                        <th scope="col">Course Code</th>
+                        <th scope="col">Course Title</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Instructor</th>
+                        <th scope="col">Credits</th>
+                        <th scope="col">Slots</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="myTable">
+                      {% for course in courses %}
+                      <tr>
+                        <td>{{course.code}}</td>
+                        <td>{{course.title}}</td>
+                        <td>{{course.department}}</td>
+                        <td>{{course.instructor}}</td>
+                        <td>{{course.credits}}</td>
+                        <td>{{course.filled_slots}} / {{ course.slots}}</td>
+                        <td>
+                  <a href="{% url 'course_details' course.code %}"" class="btn btn-primary btn-sm p-2 m-1">View details</a>
+                  <a href="{% url 'student_enrollments_page' course.code %}" class="btn btn-success btn-sm p-2 m-1" onclick="refreshPage()">Student enrollments</a>
+                </td> 
+              </tr>
+              {% endfor %} 
+            </tbody>
+      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="CURD-course card bg-white mx-5 my-4 p-3 shadow-sm"style="width:90rem">
+  {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endfor%}
+  <p class="d-inline-flex gap-3">
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#add-course" aria-expanded="false" aria-controls="add-course">
+      Add a new course
+    </button>
+    <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#remove-course" aria-expanded="false" aria-controls="delete-course">
+      Remove a course
+    </button>
+  </p>
+  <div class="collapse" id="add-course">
+    <!-- <section class="add-course card bg-white mx-4 my-4 p-3 shadow-sm"> -->
+      <h4>Add a new course</h4>
+    <form class="row  mx-3 my-3 card p-2 border-primary " action="/add-course/"method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row g-3">
+        <div class="col-sm-3">
+          <label for="code" class="form-label ">Course Code</label>
+          <input type="text" class="form-control border border-primary" name="code" id="code" placeholder="Course Code" required />
+        </div>
+        <div class="col-sm-3">
+          <label for="title" class="form-label">Course title</label>
+          <input type="text" class="form-control border border-primary"name="title" id="title" required />
+        </div>
+        <div class="col-sm-2">
+          <label for="credits" class="form-label">Course Credits</label>
+          <input type="text" class="form-control border border-primary" name="credits" id="credits" required />
+        </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-sm-3">
+            <label for="instructor" class="form-label">Instructor's name</label>
+            <input type="text"class="form-control border border-primary" id="instructor" name="instructor" placeholder="" required />   
+        </div>
+        <div class="col-sm-5">
+          <label class="form-label" for="email">Instructor's email</label>
+            <input type="email" class="form-control border border-primary" id="email" name="email" placeholder="" required/>
+        </div>
+        </div>
+        <div class="row g-3">
+        <div class="col-sm-3">
+          <label class="form-label" for="department">Department:</label>
+        <select id="department" class="form-select border border-primary" name="department" required>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Electronics and Communication">Electronics and Communication</option>
+            <option value="Electrical and Electronics">Electrical and Electronics</option>
+            <option value="Mechanical Engineering">Mechanical</option>
+            <option value="Mathematical and Computational Sciences">Mathematical and Computational Sciences</option>
+            <option value="Chemical Engineering">Chemical Engineering</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="Mining Engineering">Mining Engineering</option>
+            <option value="Metallurgical and Materials Engineering">Metallurgical and Materials Engineering</option>
+            <option value="Water Resources & Ocean Engg">Water Resources & Ocean Engg</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="School of Humanities,Social Sciences,and Management">School of Humanities,Social Sciences,and Management</option>
+            <option value="Physics">Physics</option>      
+        </select>
+      </div>
+      <div class="col-sm-2">
+        <label class="form-label" for="program_type">Program Type:</label>
+        <select class="form-select border border-primary" id="program_type" name="program_type" required>
+            <option value="BTech">BTech</option>
+            <option value="MTech">MTech</option>
+            <option value="MBA">MBA</option>
+            <option value="MCA">MCA</option>
+            <option value="PHD">PHD</option>
+        </select>
+      </div>
+      <div class="col-sm-1">
+        <label for="slots" class="form-label">Slots</label>
+        <input type="text" class="form-control border border-primary" name="slots" id="slots" required />
+      </div>
+      <div class="col-sm-2">
+        <label for="cgpa" class="form-label">Prerequistes</label>
+        <input type="text" class="form-control border border-primary" name="cgpa" id="cgpa" placeholder="Required CGPA" required />
+      </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-sm-2">
+  <label for="schedule" class="form-label">Schedule PDF</label>
+  <input class="form-control form-control-sm border border-primary"  type="file" name="schedule" id="schedule" name="schedule" accept=".pdf" placeholder="Schedule PDF" required/>
+  </div>
+  <div class="col-sm-8">
+    <label for="details" class="form-label">Course Details</label>
+    <textarea class="form-control border border-primary" name="details" id="details" rows="4" required />{{course.details}}</textarea>
+    </div>
+  </div>
+      <div class="row g-3">
+        <div class="col-sm">
+          <button type="submit" class="btn btn-primary"> Submit </button>
+        </div>
+      </div>
+    </form>
+  <!-- </section> -->
+  </div>
+  <div class="collapse" id="remove-course">
+    <!-- <section class="add-course card bg-white mx-4 my-4 p-3 shadow-sm"> -->
+      <h4>Remove course</h4>
+    <form class="row  mx-3 my-3 card p-2 border-primary " action="/remove-course/"method="post" enctype="multipart/form-data" style="width:50rem">
+      {% csrf_token %}
+      <div class="row g-3" style="width:50rem">
+        <div class="col-md-4">
+          <label for="code" class="form-label">Course Code</label>
+          <input type="text" class="form-control" name="code" id="code" placeholder="Course Code" required />
+        </div>
+        <div class="col-md-5">
+          <label for="title" class="form-label">Course title</label>
+          <input type="text" class="form-control"name="title" placeholder="Course title" id="title" required />
+        </div>
+        <div class="row g-3">
+          <div class="col-sm">
+            <button type="submit" class="btn btn-primary"> Remove </button>
+          </div>
+        </div>
+      </form>
+    <!-- </section> -->
+    </div>
+</section>
+</body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script>
+    function refreshPage() {
+      window.location.reload();
+    }
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    document.addEventListener("DOMContentLoaded",() =>{
+      $('.alert').alert();
+    })
+    </script>
+</body>
+</html>
+
+

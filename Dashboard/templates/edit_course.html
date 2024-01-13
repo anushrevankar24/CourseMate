@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href='/static/css/student_dashboard.css'>
+  <title>Edit Course Details</title>
+</head>
+<body>
+  <header>
+  </header>
+  <div class="card p-3 m-auto my-4 shadow-md" style="width:70rem; height:35rem;">
+    <h1>{{course.code}}</h1>
+  <form class="edit-course  m-auto my-3 card p-2 border-primary " action="/edit-course/"method="post" enctype="multipart/form-data" style="width:65rem;height:auto;">
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endfor%}
+   
+    {% csrf_token %}
+    <div class="row g-4 p-1 mx-2">
+      <div class="col-sm-3">
+        <label for="code" class="form-label ">Course Code</label>
+        <input type="text" value={{course.code}}  class="form-control" name="code" id="code" required />
+      </div>
+      <div class="col-sm-3">
+        <label for="title" class="form-label">Course title</label>
+        <input type="text" value={{course.title}} class="form-control" name="title" id="title" required />
+      </div>
+      <div class="col-sm-2">
+        <label for="credits" class="form-label">Course Credits</label>
+        <input type="text" value={{course.credits}} class="form-control" name="credits" id="credits" required />
+      </div>
+    </div>
+    <div class="row g-4 p-2 mx-2">
+        <div class="col-sm-4">
+            <label for="program_type" class="form-label">Program Type</label>
+            <select name="program_type" value={{course.program_type}} id="program_type" class="form-select" required />
+              <option selected>Choose...</option>
+              <option>BTech</option>
+              <option>MTech</option>
+              </select>
+          </div>
+      <div class="col-sm-2">
+        <label for="slots" class="form-label">Slots</label>
+        <input type="text" value={{course.slots}} class="form-control" name="slots" id="slots" required />
+      </div>
+      <div class="col-sm-4">
+<label for="schedule" class="form-label">Schedule PDF</label>
+<input class="form-control form-control-sm" value="{{course.schedule}}" type="file" name="schedule" id="schedule" name="schedule" accept=".pdf"  required/>
+</div>
+
+</div>
+<div class="row g-3 p-1 mx-2">
+    <div class="col-sm-8">
+        <label for="details" class="form-label">Course Details</label>
+        <textarea class="form-control" name="details" id="details" rows="4" required />{{course.details}}</textarea>
+        </div>
+</div>
+
+    <div class="row g-3 p-3 mx-2">
+      <div class="col-sm">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </form>
+<!-- </section> -->
+</div>
+</div>
+</div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script>
+    function refreshPage() {
+      window.location.reload();
+    }
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    document.addEventListener("DOMContentLoaded",() =>{
+      $('.alert').alert();
+    })
+    </script>
+</body>
+</html>
+
+
+
