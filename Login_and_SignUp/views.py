@@ -18,7 +18,8 @@ def student_signup_page(request):
         role='student'
         name=request.POST.get('name')
         s_id=request.POST.get('id')
-        email=request.POST.get('email')  
+        email=request.POST.get('email') 
+        cgpa=request.POST.get('cgpa')   
         program_type=request.POST.get('program_type')
         department= request.POST.get('department')
         password=request.POST.get('password')
@@ -37,6 +38,7 @@ def student_signup_page(request):
                password=password,
               name=name,
               s_id=s_id,
+              cgpa=cgpa,
                department=department,
                 program_type=program_type,
                 role=role
@@ -53,6 +55,7 @@ def faculty_signup_page(request):
         name=request.POST.get('name')
         id=request.POST.get('id')
         email=request.POST.get('email')  
+       
         department= request.POST.get('department')
         password=request.POST.get('password')
         confirm_password=request.POST.get('confirm_password')

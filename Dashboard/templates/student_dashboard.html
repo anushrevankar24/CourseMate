@@ -21,33 +21,58 @@
       <button class="logout-btn" onclick="window.location.href='/logout/';">Log out</button> 
     </nav>
   </header>
-<section class="my_submissions card bg-white mx-4 my-4 p-3" id="my_submissions" style="width : 24rem;">
-  <h4>My Submissions</h4>
-<div class="container p-1 bg-white mx-1 my-1" style="width : 20rem;">
-  <div class="row">
-    <div class="col">
-      <div style="max-height: 500px; overflow-y: auto;">
-        <table id="Submission-table" class="table table-fixed table-striped table-light" style="width : 19rem;">
-          <thead>
-            <tr>
-              <th scope="col">Course Code</th>
-              <th scope="col-sm-1">Status</th>
-            </tr>
-          </thead>
-          <tbody id="Submission-table">
-            {% for submission in submissions %}
-              <tr>
-                <td>{{submission.course.code}}</td>
-                <td>{{submission.status}}</td>
-              </tr>
-            {% endfor %} 
-          </tbody>
-        </table>   
+  <div class="row g-1">
+    <div class="col-sm-4">
+      <div class="my_submissions card bg-white ms-4 mt-4 mb-3 p-3" id="my_submissions" style="width : 25rem;">
+        <h4>My Submissions</h4>
+      <div class="container p-1 bg-white mx-1 my-1" style="width : 20rem;">
+        <div class="row">
+          <div class="col">
+            <div style="max-height: 200px; overflow-y: auto; overflow-x: hidden;">
+              <table id="Submission-table" class="table table-fixed table-striped table-light" style="width : 19rem;">
+                <thead>
+                  <tr>
+                    <th scope="col">Course Code</th>
+                    <th scope="col-sm-1">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="Submission-table">
+                  {% for submission in submissions %}
+                    <tr>
+                      <td>{{submission.course.code}}</td>
+                      <td>{{submission.status}}</td>
+                    </tr>
+                  {% endfor %} 
+                </tbody>
+              </table>   
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+      </div>
+    <div class="col-sm-7">
+      <section class="card p-3  mt-5 mb-3 shadow-md" style="width:50rem; height:12rem;">
+        <h5 class="card-header">My Profile</h5>
+        <div class="card-body">
+          <div class="row g-1 p-3">
+            <div class="col-sm-4">
+          <h5 class="card-title">{{student.name}}</h5>
+          <h5 class="card-title">{{student.program_type}}</h5>
+            </div>
+            <div class="col-sm-4 ">
+              <h5 class="card-title">CGPA : {{student.cgpa}}</h5>
+              <h5 class="card-title">{{student.department}}</h5>
+                </div>
+                <div class="col-sm-4 ">
+                  <h5 class="card-title">{{student.s_id}}</h5>
+                    </div>
+            </div>
+        </div>
+      </section>
   </div>
 </div>
-</section>
+
   <section class="view-courses card bg-white mx-4 my-4 w-55 p-3">
     <h4>Available Courses</h4>
     <div class="row g-3 mx-2 my-1">

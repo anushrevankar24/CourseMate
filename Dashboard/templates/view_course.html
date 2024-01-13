@@ -22,9 +22,10 @@
       <p class="card-text">Credits : {{course.credits}}</p>
       <p class="card-text">Program Type : {{course.program_type}}</p>
       <p class="card-text">Slots : {{course.filled_slots}} / {{ course.slots}}</p>
+      <p class="card-text">CGPA Criteria : {{course.cgpa}}</p>
       <p class="card-text">Description : {{course.details}}</p>
       <p class="d-inline-flex gap-3">
-        <a href="{% url 'download' course.code %}" class="btn btn-success btn-sm p-2 m-1">Download</a>
+        <a href="{% url 'download' course.code %}" class="btn btn-success btn-sm p-2 m-1">Download Schedule</a>
         <!-- <a href="{{course.schedule}}" download>Download</a> -->
       </p>  
   </div>

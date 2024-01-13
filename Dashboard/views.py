@@ -23,10 +23,12 @@ def student_dashboard_page(request):
     courses = courses_list(request)
     cart_items = course_cart(request)
     submissions = submission(request)
+    student=request.user
     data = {
        'courses': courses,
        'cart_items': cart_items,
        'submissions': submissions,
+       'student': student,
     }
     return render(request,'student_dashboard.html',data)
 
@@ -95,6 +97,9 @@ def submit(request):
     student=request.user
     for item in cart_items:
         submitted_course=item.course
+        if(submitted_course.cgpa >student.cgpa):
+            messages.error(request,f"To submit {submitted_course.code} course , your CGPA must be at least {submitted_course.cgpa} , Please remove the course  to procced further")
+            return redirect('student_dashboard_page') 
         if(enrollment.objects.filter(student=student,course=submitted_course,status='Requested').exists()
              ):
             messages.error(request,f"{submitted_course.code} is already been submitted , Please remove it to procced further")
