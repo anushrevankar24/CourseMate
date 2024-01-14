@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 from decouple import config
 from django.core.mail import send_mail
 
-
 @login_required(login_url='faculty-login/')
 def faculty_dashboard_page(request):
     courses = courses_list(request)
