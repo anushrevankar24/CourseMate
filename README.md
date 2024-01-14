@@ -2,9 +2,9 @@
 
 CourseMate is a web-based course registration system developed using the Django framework. It simplifies the process of course registration for students and facilitates course management for administrators and faculty.
 
-## Demo Video
+## Watch CourseMate Demo Video
 
-[Watch CourseMate Demo Video](#) 
+[Video Link](https://drive.google.com/file/d/1SXEztR2rfXsj0CFK44OlWZoXUXs6pazI/view?usp=drive_link) 
 
 ## Installation
 
