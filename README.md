@@ -105,10 +105,20 @@ Note: Ensure that all the prerequisites are installed and the virtual environmen
 
 ### Notifications & Reminders:
 
-- Automated emails notifications to the students on enrollment and submission updates.
+**Automated emails notifications to the students on enrollment and submission updates.**
+
+![CourseMate_notification_1](https://github.com/anushrevankar24/IRIS_Rec23_221AI009_Django/assets/129506519/5c408ee8-e579-4258-bd0e-242aafb65597)
+- 
+![CourseMate_notification_3](https://github.com/anushrevankar24/IRIS_Rec23_221AI009_Django/assets/129506519/37285c70-612f-48de-b5b4-808170b37f28)
+-
+![CourseMate_notification_2](https://github.com/anushrevankar24/IRIS_Rec23_221AI009_Django/assets/129506519/221d9f8f-d6c9-43c3-9055-48675032221e)
+
+
+
 
 
 ## Contributing
+
 
 We welcome contributions from the community to enhance the CourseMate project. Here's how you can contribute:
 
@@ -123,15 +133,12 @@ We welcome contributions from the community to enhance the CourseMate project. H
 Please ensure your Pull Request description clearly describes the changes made and any associated issues.
 
 
-## Known Bugs
-
-- [Bug 1]
-- [Bug 2]
-
 ## References
 
 - Django Documentation
-- [Any other references used]
+- Django - https://docs.djangoproject.com/en/4.0/topics/auth/
+- https://youtube.com/playlist?list=PLVBKjEIdL9bvCdI4l1Emvbezv10GjUaLk&si=3fw54c4hNZnKNntf
+- https://youtube.com/playlist?list=PLjVLYmrlmjGcyt3m6rt21nfjhYSWP_Ue_&si=M_keMoDalE1-4J85
 
 ## Screenshots
 
