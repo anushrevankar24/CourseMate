@@ -10,15 +10,18 @@ CourseMate is a web-based course registration system developed using the Django 
 
 Follow these steps to set up the project from scratch.
 
-### Prerequisites
+### Technologies used
 
 - Python 3.11.4
-- Django
+- Django - MVC architecture
+- SMTP
+- HTML/CSS/JavaScript/Bootstrap
+- sqlite3 database
 
 
-### Installation Steps
+## Installation Steps
 
-## Local Setup Instructions
+### Local Setup Instructions
 1. **Clone this repository**.
 
 2. **Environment Setup:**
@@ -36,10 +39,10 @@ Follow these steps to set up the project from scratch.
        ```
        source venv/bin/activate
        ```
-3. **Navigate to the project directory**
-     ```bash
+  3. **Navigate to the project directory**
+      ```bash
      cd CourseMate
-     ```
+      ```
      
 
 
@@ -47,7 +50,7 @@ Follow these steps to set up the project from scratch.
      ```
      pip install -r requirements.txt
      ```
- ## Running the Application:     
+ ### Running the Application:     
   1. **Perform database migrations**
       ```
       python manage.py makemigrations
@@ -55,14 +58,14 @@ Follow these steps to set up the project from scratch.
       ```
        python manage.py migrate
       ```
- 2. **Create a superuser**  
-   ```
-     python manage.py createsuperuser  
-   ``` 
-3.**Start the development server**
-  ```
-   python manage.py runserver
-  ```
+  2. **Create a superuser**  
+      ```
+      python manage.py createsuperuser  
+      ``` 
+  3. **Start the development server**
+      ```
+     python manage.py runserver
+       ```
 Open the application in your web browser: http://127.0.0.1:8000/  
 
 To access the admin panel, go to http://127.0.0.1:8000/admin/ and log in with the superuser credentials created during installation.  
@@ -76,7 +79,7 @@ Note: Ensure that all the prerequisites are installed and the virtual environmen
 - Sign Up / Login
 - Log in and view available courses based on the program/major.
 - Search for courses by code, title, or department.
-- Check course schedules.
+- Check course details and download schedule
 - Add courses to the course cart.
 - Remove courses from cart.
 - Submit enrollment request for the courses in the course cart to the instructors  .
@@ -95,13 +98,21 @@ Note: Ensure that all the prerequisites are installed and the virtual environmen
 ### Admin Functions:
 - View all courses, student enrollments, and available slots.
 - Add/Remove courses.
+-  Accept / Reject student enrollment requests
 - View enrollment statistics.
+
 
 ### Enrollment & Validation:
 
 - Students submit course selections.
-- System checks prerequisites.
-- Instructors manage student enrollments.
+- System checks prerequisites like CGPA criteria for enrolling a particular course.
+- Faculty/admin manage student enrollments.
+
+### Exceptions and edge cases handled:
+- Students cannot add the same course to cart more then once
+- Students cannot submit same course more then once
+- Two courses with same course code cannot be added by faculty/admin
+
 
 ### Notifications & Reminders:
 
@@ -115,10 +126,15 @@ Note: Ensure that all the prerequisites are installed and the virtual environmen
 
 
 
+## References
 
+- [Django Documentation](https://docs.djangoproject.com/en/5.0/)
+-  https://docs.djangoproject.com/en/4.0/topics/auth/
+- [Sending email in Django](https://docs.djangoproject.com/en/5.0/topics/email/)
+- https://youtube.com/playlist?list=PLVBKjEIdL9bvCdI4l1Emvbezv10GjUaLk&si=3fw54c4hNZnKNntf
+- https://youtube.com/playlist?list=PLjVLYmrlmjGcyt3m6rt21nfjhYSWP_Ue_&si=M_keMoDalE1-4J85
 
 ## Contributing
-
 
 We welcome contributions from the community to enhance the CourseMate project. Here's how you can contribute:
 
@@ -132,17 +148,8 @@ We welcome contributions from the community to enhance the CourseMate project. H
 
 Please ensure your Pull Request description clearly describes the changes made and any associated issues.
 
-
-## References
-
-- Django Documentation
-- Django - https://docs.djangoproject.com/en/4.0/topics/auth/
-- https://youtube.com/playlist?list=PLVBKjEIdL9bvCdI4l1Emvbezv10GjUaLk&si=3fw54c4hNZnKNntf
-- https://youtube.com/playlist?list=PLjVLYmrlmjGcyt3m6rt21nfjhYSWP_Ue_&si=M_keMoDalE1-4J85
-
-## Screenshots
-
-- [Include relevant screenshots if available]
+## Contact :
+ **Email : anushrevenkar07@gmail.com**
 
 Feel free to reach out for any issues or improvements! Happy coding with CourseMate!
 
