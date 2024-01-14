@@ -4,7 +4,7 @@ CourseMate is a web-based course registration system developed using the Django 
 
 ## Watch CourseMate Demo Video
 
-[Video Link](https://drive.google.com/file/d/1SXEztR2rfXsj0CFK44OlWZoXUXs6pazI/view?usp=drive_link) 
+[Video Link](https://drive.google.com/file/d/1sAD3tZ0ymyPJFBUfmHMeEksKjeaCTGm_/view?usp=drive_link) 
 
 ## Installation
 
@@ -129,7 +129,22 @@ Note: Ensure that all the prerequisites are installed and the virtual environmen
 - a back button for all the pages
 - grades section
 - course feedback forms
-  
+
+ ## Problems/Solutions
+ **During the development of the CourseMate project, I encountered and successfully addressed two significant challenges:**
+
+ ### Problem No 1: Sending Notification Emails to Users
+ The recent modifications in Google's guidelines for Gmail accounts removed the option of access for lesser-known apps, creating issues for developers in providing access to their Gmail accounts for project-related emails. Consequently, the conventional SMTP server for sending emails was no longer feasible. To overcome this hurdle, I implemented the concept of an app password for the Gmail account. By utilizing this app password, third-party servers and applications could successfully log in to the accounts and send emails, resolving the problem effectively.
+
+### Problem No 2: Approve/Reject student enrollment requests options for the faculty
+Issue:
+Managing and categorizing enrollment requests into approved, rejected, and requested posed a challenge. Additionally, providing options for faculty to approve or reject enrollment requests required a structured solution.
+
+Solution:
+I introduced a new model called Enrollment, which stores details of the course and student. The model includes a field called status, which is initially set to 'Request' but can be changed to 'Accepted', 'Rejected', or 'Requested'.
+When a student submits a course, the status of the enrollment changes from 'Request' to 'Requested'. If the faculty accepts the student enrollment request, the status changes to 'Accepted'; otherwise, it changes to 'Rejected'
+
+
 ## References
 
 - [Django Documentation](https://docs.djangoproject.com/en/5.0/)
