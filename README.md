@@ -125,7 +125,7 @@ Note: Ensure that all the prerequisites are installed and the virtual environmen
 ![CourseMate_notification_2](https://github.com/anushrevankar24/IRIS_Rec23_221AI009_Django/assets/129506519/221d9f8f-d6c9-43c3-9055-48675032221e)
 
 
-###Features/Improvements that can be added
+### Features/Improvements that can be made
 - a back button for all the pages
 - grades section
 - course feedback forms
