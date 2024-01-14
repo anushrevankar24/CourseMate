@@ -145,7 +145,7 @@ def approve(request,email,code):
     email_body = (
             f"{course.code} course instructor has accepted your enroll request. You have been successfully enrolled in the {course.code} course\n\n\n"
             
-           "This is an automated message. Please do not reply to this email.\n"
+           "This is an automated message. Please do not reply to this email.\n\n"
            
            "Regards\n"
             "Team CourseMate\n"
