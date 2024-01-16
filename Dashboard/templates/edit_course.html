@@ -13,9 +13,9 @@
 <body>
   <header>
   </header>
-  <div class="card p-3 m-auto my-4 shadow-md" style="width:70rem; height:35rem;">
+  <div class="card p-3 m-auto my-4 shadow-md" style="width:70rem; height:auto;">
     <h1>{{course.code}}</h1>
-  <form class="edit-course  m-auto my-3 card p-2 border-primary " action="{% url 'update_course' code=course.code %}" method="post" enctype="multipart/form-data" style="width:65rem;height:auto;">
+  <form class="edit-course  m-auto my-3 card p-2 border-primary " action="{% url 'update' course.code %}" method="post" enctype="multipart/form-data" style="width:65rem;height:auto;">
     {% for message in messages %}
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>{{message}}</strong>
@@ -55,6 +55,7 @@
       </div>
       <div class="col-sm-4">
 <label for="schedule" class="form-label">Schedule PDF</label>
+<p class="small text-muted" style="width:30rem;">Current file: {{course.schedule}}</p>
 <input class="form-control form-control-sm" value="{{course.schedule}}" type="file" name="schedule" id="schedule" name="schedule" accept=".pdf">
 </div>
 

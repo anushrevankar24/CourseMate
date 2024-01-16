@@ -178,6 +178,8 @@ def download(request, code):
             return response
     raise Http404
 
+
+@login_required(login_url='/')
 def student_enrollments_page(request,code):
     course =courses.objects.get(code=code)
     requests=enrollment.objects.filter(course=course,status="Requested")
@@ -221,7 +223,8 @@ def add_course(request):
       course.save()
       messages.success(request,"New Course added Successfully !!! ")  
       return redirect('faculty_dashboard_page')
-   
+
+@login_required(login_url='/')
 def edit_course(request,code):
     course=courses.objects.values().get(code=code)
     data={
@@ -240,18 +243,19 @@ def update(request,code):
        slots=request.POST.get('slots')
        schedule = request.FILES.get('schedule') 
        program_type=request.POST.get('program_type')
+       if schedule :
+            courses.objects.filter(code=code).update(schedule=schedule)
        courses.objects.filter(code=code).update(email=email,
                       code=code,
                       title=title,
                       instructor=instructor,
                       credits=credits,
                       slots=slots,
-                      schedule=schedule,
                       program_type=program_type, 
                       department=department,
                       details=details)
        messages.success(request,"Course details updated Successfully !!! ")  
-       return redirect('edit_course')
+       return redirect('edit_course',code)
    
    
 def remove_course(request):

@@ -52,8 +52,9 @@
                         <td>{{course.credits}}</td>
                         <td>{{course.filled_slots}} / {{ course.slots}}</td>
                         <td>
+                          <a href="{% url 'student_enrollments_page' course.code %}" class="btn btn-success btn-sm p-2 m-1" onclick="refreshPage()">Student enrollments</a>
                   <a href="{% url 'course_details' course.code %}"" class="btn btn-primary btn-sm p-2 m-1">View details</a>
-                  <a href="{% url 'student_enrollments_page' course.code %}" class="btn btn-success btn-sm p-2 m-1" onclick="refreshPage()">Student enrollments</a>
+                  <a href="{% url 'edit_course' course.code %}" class="btn btn-primary btn-sm p-2 m-1" onclick="refreshPage()">Edit course details</a>
                 </td> 
               </tr>
               {% endfor %} 
