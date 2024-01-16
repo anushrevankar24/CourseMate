@@ -18,7 +18,8 @@ class courses(models.Model):
         return self.code
 
 class Cart(models.Model):
-    user=models.ForeignKey(CustomUser,on_delete=models.CASCADE , related_name='cart')
+    # user=models.ForeignKey(CustomUser,on_delete=models.CASCADE , related_name='cart')
+    user=models.OneToOneField(CustomUser,on_delete=models.CASCADE , related_name='cart')
     def __str__(self):
         return self.user.email
 

@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from decouple import config
 from django.core.mail import send_mail
 
-@login_required(login_url='faculty-login/')
+@login_required(login_url='/faculty-login/')
 def faculty_dashboard_page(request):
     courses = courses_list(request)
     data={
@@ -17,7 +17,7 @@ def faculty_dashboard_page(request):
     }
     return render(request,'faculty_dashboard.html',data)
 
-@login_required(login_url='student-login/')
+@login_required(login_url='/student-login/')
 def student_dashboard_page(request):
     courses = courses_list(request)
     cart_items = course_cart(request)
@@ -31,7 +31,7 @@ def student_dashboard_page(request):
     }
     return render(request,'student_dashboard.html',data)
 
-@login_required(login_url='admin-login/')
+@login_required(login_url='/admin-login/')
 def admin_dashboard_page(request):
     courses = courses_list(request)
     data={
@@ -232,7 +232,6 @@ def edit_course(request,code):
 def update(request,code):
     if request.method == 'POST':
        email = request.user.email
-       code=request.POST.get('code')
        title=request.POST.get('title')
        department =request.user.department
        details=request.POST.get('details')
@@ -251,19 +250,19 @@ def update(request,code):
                       program_type=program_type, 
                       department=department,
                       details=details)
-    
        messages.success(request,"Course details updated Successfully !!! ")  
        return redirect('edit_course')
    
    
-def remove_course(request,code,title):
-    if(courses.objects.get(code=code,title=title).exists()):
-         course=courses.objects.get(code=code,title=title)
-         user=request.user
-         cart_items=CartItems.objects.filter(course=course)
-         cart_items.delete()
-         course.delete()
-         messages.success(request,f"{code} Course removed Successfully !!! ") 
-    else:
-        messages.error(request,"Course not found !! Please enter correct details")
+def remove_course(request):
+    if request.method == 'POST':
+      code=request.POST.get('code')
+      try:
+            course = courses.objects.get(code=code)
+            cart_items = CartItems.objects.filter(course=course)
+            cart_items.delete()
+            course.delete()
+            messages.success(request, f"{code} Course removed Successfully !!! ")
+      except courses.DoesNotExist:
+            messages.error(request, "Course not found !! Please enter correct details")
     return redirect('admin_dashboard_page')

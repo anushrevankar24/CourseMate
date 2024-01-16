@@ -15,7 +15,7 @@
   </header>
   <div class="card p-3 m-auto my-4 shadow-md" style="width:70rem; height:35rem;">
     <h1>{{course.code}}</h1>
-  <form class="edit-course  m-auto my-3 card p-2 border-primary " action="/edit-course/"method="post" enctype="multipart/form-data" style="width:65rem;height:auto;">
+  <form class="edit-course  m-auto my-3 card p-2 border-primary " action="{% url 'update_course' code=course.code %}" method="post" enctype="multipart/form-data" style="width:65rem;height:auto;">
     {% for message in messages %}
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>{{message}}</strong>
@@ -29,7 +29,7 @@
     <div class="row g-4 p-1 mx-2">
       <div class="col-sm-3">
         <label for="code" class="form-label ">Course Code</label>
-        <input type="text" value={{course.code}}  class="form-control" name="code" id="code" required />
+        <input type="text" value={{course.code}}  class="form-control" name="code" id="code" disabled>
       </div>
       <div class="col-sm-3">
         <label for="title" class="form-label">Course title</label>
@@ -55,7 +55,7 @@
       </div>
       <div class="col-sm-4">
 <label for="schedule" class="form-label">Schedule PDF</label>
-<input class="form-control form-control-sm" value="{{course.schedule}}" type="file" name="schedule" id="schedule" name="schedule" accept=".pdf"  required/>
+<input class="form-control form-control-sm" value="{{course.schedule}}" type="file" name="schedule" id="schedule" name="schedule" accept=".pdf">
 </div>
 
 </div>
