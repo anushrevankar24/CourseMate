@@ -54,8 +54,7 @@ def course_cart(request):
     cart, _ =Cart.objects.get_or_create(user=user)
     cart_items = (
             CartItems.objects
-            .filter(cart=cart)
-            .select_related('course').exclude(course__isnull=True)
+            .filter(cart=cart).exclude(course__isnull=True)
         )
     return cart_items
 
@@ -81,7 +80,6 @@ def add_to_cart(request,code):
         CartItems.objects.create(cart=cart,course=course)
         messages.success(request,f"{course.code} course sucessfully added to your cart")
     return redirect('student_dashboard_page')
-
 
 def remove_from_cart(request,code):
     course=courses.objects.get(code=code)
@@ -139,8 +137,8 @@ def approve(request,email,code):
     e=enrollment.objects.filter(student=student,course=course,status='Requested').update(status='Accepted')
     EMAIL_HOST_USER = config('EMAIL_HOST_USER')
     from_email = f"CourseMate <{EMAIL_HOST_USER}>"
-    # from_email = f"Do not reply to this email (via CRS) <emailnotifications07.noreply@gmail.com>"
-    email_subject = "Course enrollment request Accepted"
+    # from_email = "emailnotifications07.noreply@gmail.com"
+    email_subject ="Course enrollment request Accepted"
     email_body = (
             f"{course.code} course instructor has accepted your enroll request. You have been successfully enrolled in the {course.code} course\n\n\n"
             
@@ -156,7 +154,7 @@ def approve(request,email,code):
           from_email,
           [student.email],
           fail_silently=False,
-            ) 
+            )  
     except Exception as e:
        messages.error(request, f"Failed to send email: {str(e)}")
     return redirect('student_enrollments_page',code)
@@ -177,7 +175,6 @@ def download(request, code):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
-
 
 @login_required(login_url='/')
 def student_enrollments_page(request,code):
@@ -234,25 +231,20 @@ def edit_course(request,code):
     
 def update(request,code):
     if request.method == 'POST':
-       email = request.user.email
        title=request.POST.get('title')
-       department =request.user.department
        details=request.POST.get('details')
-       instructor=request.user.name
        credits=request.POST.get('credits')
        slots=request.POST.get('slots')
        schedule = request.FILES.get('schedule') 
        program_type=request.POST.get('program_type')
        if schedule :
             courses.objects.filter(code=code).update(schedule=schedule)
-       courses.objects.filter(code=code).update(email=email,
+       courses.objects.filter(code=code).update(
                       code=code,
                       title=title,
-                      instructor=instructor,
                       credits=credits,
                       slots=slots,
                       program_type=program_type, 
-                      department=department,
                       details=details)
        messages.success(request,"Course details updated Successfully !!! ")  
        return redirect('edit_course',code)

@@ -55,7 +55,6 @@ def faculty_signup_page(request):
         name=request.POST.get('name')
         id=request.POST.get('id')
         email=request.POST.get('email')  
-       
         department= request.POST.get('department')
         password=request.POST.get('password')
         confirm_password=request.POST.get('confirm_password')
@@ -92,7 +91,8 @@ def student_login_page(request):
             return redirect('student_dashboard_page')
         else :
             messages.error(request,"Credentials did not match")
-            return redirect('student_login_page')
+            return render(request, 'student_login.html')
+            # return redirect('student_login_page')
     return render(request, 'student_login.html')
   
 def faculty_login_page(request):

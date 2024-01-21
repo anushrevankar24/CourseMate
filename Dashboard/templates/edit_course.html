@@ -33,7 +33,7 @@
       </div>
       <div class="col-sm-3">
         <label for="title" class="form-label">Course title</label>
-        <input type="text" value={{course.title}} class="form-control" name="title" id="title" required />
+        <textarea class="form-control" name="title" id="tilte" rows="1" required />{{course.title}}</textarea>
       </div>
       <div class="col-sm-2">
         <label for="credits" class="form-label">Course Credits</label>
@@ -44,9 +44,11 @@
         <div class="col-sm-4">
             <label for="program_type" class="form-label">Program Type</label>
             <select name="program_type" value={{course.program_type}} id="program_type" class="form-select" required />
-              <option selected>Choose...</option>
-              <option>BTech</option>
-              <option>MTech</option>
+            <option value="BTech">BTech</option>
+            <option value="MTech">MTech</option>
+            <option value="MBA">MBA</option>
+            <option value="MCA">MCA</option>
+            <option value="PHD">PHD</option>
               </select>
           </div>
       <div class="col-sm-2">
