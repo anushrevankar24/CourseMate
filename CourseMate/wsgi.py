@@ -11,7 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Course_Registration.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CourseMate.settings')
 
 application = get_wsgi_application()
 

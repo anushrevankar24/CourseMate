@@ -12,7 +12,7 @@ import django
 from channels.routing import ProtocolTypeRouter , URLRouter
 from django.core.asgi import get_asgi_application
 from django.urls import path
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Course_Registration.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CourseMate.settings')
 django.setup()
 from channels.auth import AuthMiddlewareStack
 

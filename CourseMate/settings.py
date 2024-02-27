@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Course_Registration.urls'
+ROOT_URLCONF = 'CourseMate.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
         },
     },
 ]
-WSGI_APPLICATION = 'Course_Registration.wsgi.application'
+WSGI_APPLICATION = 'CourseMate.wsgi.application'
 # ASGI_APPLICATION = 'Course_Registration.asgi.application'
 
 # CHANNEL_LAYERS = {
